@@ -41,8 +41,6 @@ function build() {
 
         .pipe(gulp.dest(paths.docs + '/css'));
 
-
-
     var version = Date.now();
 
     gulp.src(paths.index)
@@ -56,6 +54,7 @@ function build() {
     console.log('build dist');
 
     gulp.src(paths.scripts)
+        .pipe(embedTemplates())
         .pipe(plugins.uglify())
         .pipe(gulp.dest('./dist'));
 
@@ -67,7 +66,7 @@ function build() {
 }
 
 function test() {
-
+    console.log('test');
 }
 
 gulp.task('build', build());
