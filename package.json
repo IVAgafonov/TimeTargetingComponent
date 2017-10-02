@@ -1,0 +1,23 @@
+{
+  "name": "time-targeting-component",
+  "version": "0.0.1",
+  "description": "Time targeting component",
+  "main": "index.html",
+  "scripts": {
+    "test": "test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/IVAgafonov/TimeTargetingComponent.git"
+  },
+  "keywords": [
+    "Time",
+    "Targeting"
+  ],
+  "author": "Agafonov Igor",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/IVAgafonov/TimeTargetingComponent/issues"
+  },
+  "homepage": "https://github.com/IVAgafonov/TimeTargetingComponent#readme"
+}

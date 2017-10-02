@@ -1,0 +1,21 @@
+{
+  "name": "time-targeting-component",
+  "description": "Time targeting component",
+  "main": "index.html",
+  "authors": [
+    "Agafonov Igor"
+  ],
+  "license": "MIT",
+  "keywords": [
+    "Time",
+    "Targeting"
+  ],
+  "homepage": "https://github.com/IVAgafonov/TimeTargetingComponent",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ]
+}
