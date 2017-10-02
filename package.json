@@ -2,9 +2,9 @@
   "name": "time-targeting-component",
   "version": "0.0.1",
   "description": "Time targeting component",
-  "main": "index.html",
+  "main": "dist/timeTargetingComponent.js",
   "scripts": {
-    "test": "test",
+    "test": "gulp test",
     "build": "gulp build"
   },
   "repository": {
@@ -24,7 +24,6 @@
   "devDependencies": {
     "gulp": "^3.9.1",
     "gulp-angular-embed-templates": "^2.3.0",
-    "gulp-autoprefixer": "^4.0.0",
     "gulp-clean-css": "^3.9.0",
     "gulp-concat": "^2.6.1",
     "gulp-inject": "^4.3.0",

@@ -1,7 +1,10 @@
 {
   "name": "time-targeting-component",
   "description": "Time targeting component",
-  "main": "index.html",
+  "main": [
+    "dist/timeTargetingComponent.js",
+    "dist/timeTargetingComponent.css"
+  ],
   "authors": [
     "Agafonov Igor"
   ],
