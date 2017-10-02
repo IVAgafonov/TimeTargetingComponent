@@ -58,6 +58,8 @@
                                     if (isNumeric(str[n])) {
                                         break;
                                     } else {
+                                        console.log(str[i]);
+                                        console.log(this.caps.indexOf(str[n]));
                                         obj[str[i]-1][this.caps.indexOf(str[n])] = 1;
                                     }
                                 }
