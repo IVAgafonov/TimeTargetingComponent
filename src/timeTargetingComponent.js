@@ -3,12 +3,12 @@
     angular.module('timeTargetingModule', [])
         .service('defaultTimeAdapter', [function () {
             return {
+                caps: "ABCDEFGHIJKLMNOPQRSTUVWXYZ",
                 objToString: function (obj, fix_errors) {
-                    var caps = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
                     var result = '';
                     var strByDay;
                     var day = 0;
-                    var fix_errors = fix_errors || false;
+                    fix_errors = fix_errors || false;
                     for (var d in obj) {
                         if (!obj.hasOwnProperty(d)) {
                             continue;
@@ -18,13 +18,13 @@
 
                         for (var h in obj[d]) {
                             if (obj[d][h]) {
-                                strByDay += caps.charAt(h);
+                                strByDay += this.caps.charAt(h);
                             }
                         }
                         if (day == 8 && strByDay.length) {
-                            var fullStr = caps.slice(caps.indexOf(strByDay[0]), caps.indexOf(strByDay[strByDay.length-1])+1);
+                            var fullStr = this.caps.slice(this.caps.indexOf(strByDay[0]), this.caps.indexOf(strByDay[strByDay.length-1])+1);
                             if (strByDay != fullStr && fix_errors) {
-                                for (var r = caps.indexOf(strByDay[0]); r < caps.indexOf(strByDay[strByDay.length-1])+1; r++) {
+                                for (var r = this.caps.indexOf(strByDay[0]); r < this.caps.indexOf(strByDay[strByDay.length-1])+1; r++) {
                                     obj[d][r] = 1;
                                 }
                                 strByDay = fullStr;
@@ -38,10 +38,36 @@
                     return result;
                 },
                 stringToObj: function(str, obj) {
-
+                    function isNumeric(n) {
+                        return !isNaN(parseFloat(n)) && isFinite(n);
+                    }
+                    for (var d in obj) {
+                        for (var h in obj[d]) {
+                            if (obj[d][h]) {
+                                obj[d][h] = false;
+                            }
+                        }
+                    }
+                    if (str.length) {
+                        for (var i in str) {
+                            if (str.hasOwnProperty(i) && isNumeric(str[i])) {
+                                for (var n = i; n < str.length; n++) {
+                                    if (n == i) {
+                                        continue;
+                                    }
+                                    if (isNumeric(str[n])) {
+                                        break;
+                                    } else {
+                                        console.log(str[i]);
+                                        console.log(this.caps.indexOf(str[n]));
+                                        obj[str[i]-1][this.caps.indexOf(str[n])] = 1;
+                                    }
+                                }
+                            }
+                        }
+                    }
                 },
                 isHolidaysValid: function (obj) {
-                    var caps = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
                     var result = false;
                     var strByDay;
                     var day = 0;
@@ -54,11 +80,11 @@
 
                         for (var h in obj[d]) {
                             if (obj[d][h]) {
-                                strByDay += caps.charAt(h);
+                                strByDay += this.caps.charAt(h);
                             }
                         }
                         if (strByDay.length) {
-                            var fullStr = caps.slice(caps.indexOf(strByDay[0]), caps.indexOf(strByDay[strByDay.length-1])+1);
+                            var fullStr = this.caps.slice(this.caps.indexOf(strByDay[0]), this.caps.indexOf(strByDay[strByDay.length-1])+1);
                             if (strByDay == fullStr) {
                                 result = true;
                             }

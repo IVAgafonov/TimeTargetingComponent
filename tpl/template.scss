@@ -20,6 +20,7 @@ body {
   margin: 0px auto;
   & h2 {
     color: #585858;
+    margin: 40px 0px 20px 0px;
   }
 }
 
@@ -117,5 +118,21 @@ body {
   background-image: url("data:image/svg+xml;charset=utf-8,%3Csvg xmlns='http://www.w3.org/2000/svg' preserveAspectRatio='xMidYMid' width='20' height='20' viewBox='0 0 20 20' fill='%23939699'%3E%3Cpath d='M10 0c4.838 0 8.873 3.435 9.8 8h-2.052A8.002 8.002 0 0 0 3.432 5.432L6 8H0V2l2 2a9.982 9.982 0 0 1 8-4zm4 12h6v6l-2-2a9.983 9.983 0 0 1-8 4c-4.838 0-8.873-3.436-9.8-8h2.052a8.004 8.004 0 0 0 14.316 2.568L14 12z' class='f-icon refresh'/%3E%3C/svg%3E");
 }
 
+.form-group .form-control {
+  background-color: #fff;
+  border: 1px solid #e9eff0;
+  border-radius: 2px;
+  color: #313436;
+  height: 20px;
+  display: block;
+  width: 100%;
+  font-family: Arial;
+  font-size: 14px;
+  font-weight: 400;
+  padding: 11px 14px 12px 19px;
+  transition: border-color ease-in-out .15s;
+}
 
-
+.form-line {
+  display: flex;
+}
