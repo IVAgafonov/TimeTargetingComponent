@@ -1,0 +1,181 @@
+.checkbox-zone {
+  padding: 0;
+  border: 0;
+  margin: 0 auto;
+  border-collapse: collapse;
+}
+
+.checkbox-zone tr {
+  padding: 0;
+  border: 0;
+  box-shadow: none;
+  transition: all 0.3s ease;
+}
+
+table.checkbox-zone thead th {
+  background-color: rgb(247, 250, 250);
+  border-bottom: 1px solid rgb(233, 239, 240);
+  text-align: left;
+  font-family: Arial;
+  font-size: 14px;
+  line-height: 20px;
+  text-align: left;
+}
+
+.checkbox-zone th:first-child {
+  padding-right: 10px;
+  padding-left: 15px;
+}
+
+.checkbox-zone th {
+  color: rgb(195, 200, 204);
+  font-size: 12px;
+  font-weight: 400;
+  border: 0;
+  vertical-align: middle;
+  padding: 4px 0 8px 0;
+  box-shadow: none;
+  cursor: pointer;
+}
+
+.checkbox-zone tbody th span {
+  position: relative;
+  top: 2px;
+}
+
+.checkbox-zone td {
+  padding: 4px 0 4px 0;
+  border: 0;
+  vertical-align: middle;
+}
+
+.checkbox-zone td .form-check {
+  margin: 0;
+}
+
+.checkbox-zone .form-check {
+  padding-left: 30px;
+  cursor: pointer;
+}
+
+.checkbox-zone .form-check {
+  position: relative;
+  display: block;
+  margin-top: 10px;
+  margin-bottom: 10px;
+}
+
+.checkbox-zone input[type=checkbox], .checkbox-zone input[type=radio] {
+  margin: 4px 0 0;
+  margin-top: 1px\9;
+  line-height: normal;
+  box-sizing: border-box;
+  padding: 0;
+}
+
+.checkbox-zone .form-check input[type="radio"], .checkbox-zone .form-check input[type="checkbox"] {
+  display: none;
+}
+
+.checkbox-zone .form-check input[type=checkbox], .checkbox-zone .form-check input[type=radio] {
+  position: absolute;
+  margin-top: 4px\9;
+  margin-left: -20px;
+}
+
+.checkbox-zone td .form-check label {
+  padding-left: 0;
+  padding-right: 10px;
+}
+
+.checkbox-zone .form-check label {
+  position: relative;
+}
+
+.checkbox-zone .form-check label {
+  min-height: 20px;
+  padding-left: 10px;
+  margin-bottom: 0;
+  font-weight: 400;
+  cursor: pointer;
+  color: rgb(44, 49, 51);
+  font-family: Arial;
+  font-size: 14px;
+}
+
+.checkbox-zone .form-check .form-check-control {
+  color: rgb(44, 49, 51);
+  font-family: Arial;
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 20px;
+}
+
+.checkbox-zone .form-check input[type="checkbox"]:checked + label .form-check-control:hover:before {
+  background-color: rgb(82, 225, 19);
+  border-color: rgb(82, 225, 19);
+}
+
+.checkbox-zone .form-check input[type="checkbox"]:checked + label .form-check-control:before {
+  background-color: rgb(66, 204, 5);
+  border-color: rgb(66, 204, 5);
+}
+
+.checkbox-zone .form-check .form-check-control:hover:before {
+  border: 1px solid rgb(195, 200, 204);
+}
+
+.checkbox-zone .form-check .form-check-control:before {
+  width: 20px;
+  height: 20px;
+  background-color: rgb(255, 255, 255);
+  border: 1px solid rgb(233, 239, 240);
+  border-radius: 2px;
+  left: -30px;
+  box-sizing: border-box;
+  transition: all 0.1s;
+}
+
+.checkbox-zone .form-check input[type="checkbox"]:checked + label .form-check-control:after {
+  color: #62afff;
+  background-image: url("data:image/svg+xml;charset=utf-8,%3Csvg xmlns='http://www.w3.org/2000/svg' preserveAspectRatio='xMidYMid' width='12' height='9' viewBox='0 0 12 9' fill='%23ffffff'%3E%3Cpath d='M1.414 2.261L5 6.048 10.586 0 12 1.475 5 8.999 0 3.737l1.414-1.476z' class='f-icon check-small'/%3E%3C/svg%3E");
+}
+
+.checkbox-zone .form-check .form-check-control:after {
+  width: 14px;
+  height: 11px;
+  background-position: 50% 50%;
+  background-image: none;
+  text-indent: -9999px;
+  background-repeat: no-repeat;
+  display: inline-block;
+  overflow: hidden;
+  left: -27px;
+  top: 0px;
+  color: transparent;
+  transition: color 0.1s;
+}
+
+.checkbox-zone .form-check span:before, .form-check span:after, .form-check div:before, .form-check div:after {
+  content: '';
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  margin: auto;
+}
+
+.time-targeting {
+  margin-bottom: 20px;
+}
+
+.time-targeting a.undo {
+  margin-left: 20px;
+}
+
+.time-targeting-spacing {
+  height: 15px;
+}
+
+.show-in-h {
+  padding: 0px 0px 30px 48px;
+}
