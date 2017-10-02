@@ -1,6 +1,75 @@
 (function () {
     'use strict';
     angular.module('timeTargetingModule', [])
+        .service('defaultTimeAdapter', [function () {
+            return {
+                objToString: function (obj, fix_errors) {
+                    var caps = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+                    var result = '';
+                    var strByDay;
+                    var day = 0;
+                    var fix_errors = fix_errors || false;
+                    for (var d in obj) {
+                        if (!obj.hasOwnProperty(d)) {
+                            continue;
+                        }
+                        day++;
+                        strByDay = '';
+
+                        for (var h in obj[d]) {
+                            if (obj[d][h]) {
+                                strByDay += caps.charAt(h);
+                            }
+                        }
+                        if (day == 8 && strByDay.length) {
+                            var fullStr = caps.slice(caps.indexOf(strByDay[0]), caps.indexOf(strByDay[strByDay.length-1])+1);
+                            if (strByDay != fullStr && fix_errors) {
+                                for (var r = caps.indexOf(strByDay[0]); r < caps.indexOf(strByDay[strByDay.length-1])+1; r++) {
+                                    obj[d][r] = 1;
+                                }
+                                strByDay = fullStr;
+                            }
+                        }
+
+                        if (strByDay.length) {
+                            result += day + strByDay;
+                        }
+                    }
+                    return result;
+                },
+                stringToObj: function(str, obj) {
+
+                },
+                isHolidaysValid: function (obj) {
+                    var caps = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+                    var result = false;
+                    var strByDay;
+                    var day = 0;
+                    for (var d in obj) {
+                        day++;
+                        if (day != 8) {
+                            continue;
+                        }
+                        strByDay = '';
+
+                        for (var h in obj[d]) {
+                            if (obj[d][h]) {
+                                strByDay += caps.charAt(h);
+                            }
+                        }
+                        if (strByDay.length) {
+                            var fullStr = caps.slice(caps.indexOf(strByDay[0]), caps.indexOf(strByDay[strByDay.length-1])+1);
+                            if (strByDay == fullStr) {
+                                result = true;
+                            }
+                        } else {
+                            result = true;
+                        }
+                    }
+                    return result;
+                }
+            }
+        }])
         .component('timeTargetingComponent', {
             bindings: {
                 model: '='
@@ -22,6 +91,15 @@
         vm.selectEndHourFor = 0;
 
         vm.defaultSelectValue = 1;
+
+        vm.$onInit = function() {
+            for (var d = 0; d < vm.model.days.length; d++) {
+                vm.model.grid[d] = {};
+                for (var h = 0; h < vm.model.hours.length; h++) {
+                    vm.model.grid[d][h] = 0;
+                }
+            }
+        };
 
         vm.selectStart = function (dayIndex, hourIndex) {
             vm.selectStartDay = dayIndex;
@@ -75,6 +153,7 @@
             for (d = 0; d < vm.model.days.length; d++) {
                 vm.model.grid[d][index] = vm.selectValue;
             }
+            vm.model.onChange();
         };
 
         vm.selectRow = function (index) {
@@ -89,10 +168,12 @@
             for (h = 0; h < vm.model.hours.length; h++) {
                 vm.model.grid[index][h] = vm.selectValue;
             }
+            vm.model.onChange();
         };
 
         vm.selectByCoords = function (index) {
             if (index != -1 && vm.model.buttons[index].noclear) {
+                vm.model.onChange();
                 return;
             }
 
@@ -103,6 +184,7 @@
             }
 
             if (index === -1) {
+                vm.model.onChange();
                 return;
             }
 
@@ -118,11 +200,13 @@
                     }
                 }
             }
+            vm.model.onChange();
         };
 
         vm.selectEnd = function () {
             vm.selectStartDay = '';
             vm.selectStartHour = '';
+            vm.model.onChange();
         };
 
         vm.selectTimeTargeting = function(index) {

@@ -2,12 +2,16 @@
     'use strict';
     angular.module('testApp', ['timeTargetingModule'])
         .component('testComponent', {
-            template: '<h2>Time targeting component</h2><time-targeting-component model="$ctrl.model"></time-targeting-component>',
-            controller: [testController]
+            template: '<h2>Time targeting component</h2><time-targeting-component model="$ctrl.model"></time-targeting-component><h2>Default model:</h2>'
+             +'<p>{{$ctrl.defaultModel}}</p><h2>Is holidays valid:</h2><p>{{$ctrl.isHolidaysValid}}</p>',
+            controller: ['defaultTimeAdapter', testController]
         });
 
-    function testController() {}
+    function testController(defaultTimeAdapter) {
         var vm = this;
+
+        vm.defaultModel = '';
+        vm.isHolidaysValid = true;
 
         vm.model = {
             days: ['пн', 'вт', 'ср', 'чт', 'пт', 'сб', 'вс', 'пр'],
@@ -34,6 +38,11 @@
             defaultButtonSelected: 1,
             reload: true,
             spacing: [4, 6],
-            grid: {}
+            grid: {},
+            onChange: function () {
+                vm.defaultModel = defaultTimeAdapter.objToString(vm.model.grid);
+                vm.isHolidaysValid = defaultTimeAdapter.isHolidaysValid(vm.model.grid);
+            }
         };
+    }
 })();
