@@ -142,8 +142,6 @@
                                     obj[d][r] = Math.round(holidaysSum/holidaysCount/10) * 10;
                                 }
                                 strByDay = fullStr;
-                                console.log(strByDay);
-                                console.log(fullStr);
                             }
                             if (hasErrors && fix_errors) {
                                 return this.objToString(obj, true);
@@ -275,6 +273,12 @@
             vm.options.reload = vm.options.reload || true;
             vm.options.spacing = vm.options.spacing || [4, 6];
 
+            if (vm.options.extended) {
+                vm.options.extendedTitle = vm.options.extendedTitle || 'Ставка';
+                vm.options.extendedValues = vm.options.extendedValues || [100,90,80,70,60,50,40,30,20,10,0];
+                vm.options.extendedDefaultValue = vm.options.extendedDefaultValue || 100;
+            }
+            
             for (var d = 0; d < vm.options.days.length; d++) {
                 vm.model[d] = {};
                 for (var h = 0; h < vm.options.hours.length; h++) {
