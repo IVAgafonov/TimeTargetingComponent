@@ -16,7 +16,6 @@ body {
 }
 
 .test_container {
-  width: 1000px;
   margin: 0px auto;
   & h2 {
     color: #585858;
@@ -135,4 +134,81 @@ body {
 
 .form-line {
   display: flex;
+}
+
+.ext-val100 {
+  background: #AD0000;
+  & > span {
+    color: #ffffff;
+  }
+}
+
+.ext-val90 {
+  background: #ad3b00;
+  & > span {
+    color: #ffffff;
+  }
+}
+
+.ext-val80 {
+  background: #ad6d00;
+  & > span {
+    color: #ffffff;
+  }
+}
+
+.ext-val70 {
+  background: #ad7f00;
+  & > span {
+    color: #ffffff;
+  }
+}
+
+.ext-val60 {
+  background: #c7a000;
+  & > span {
+    color: #333333;
+  }
+}
+
+.ext-val50 {
+  background: #d6c215;
+  & > span {
+    color: #333333;
+  }
+}
+
+.ext-val40 {
+  background: #deda26;
+  & > span {
+    color: #333333;
+  }
+}
+
+.ext-val30 {
+  background: #f6f100;
+  & > span {
+    color: #333333;
+  }
+}
+
+.ext-val20 {
+  background: #f6ea57;
+  & > span {
+    color: #333333;
+  }
+}
+
+.ext-val10 {
+  background: #f6e88e;
+  & > span {
+    color: #333333;
+  }
+}
+
+.ext-val0 {
+  background: #ffffff;
+  & > span {
+    color: #333333;
+  }
 }
