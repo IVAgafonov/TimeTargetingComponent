@@ -187,3 +187,69 @@ table.checkbox-zone thead th {
   -ms-user-select: none;
   user-select: none;
 }
+
+.time-targeting-wrapper {
+  &.extended {
+    display: flex;
+  }
+}
+
+.extended-block {
+  border-left: 1px solid #eceaea;
+  padding: 0px 0px 0px 20px;
+  & > h3 {
+    margin: 9px 0px 10px 0px;
+    font-size: 14pt;
+    color: #585858;
+    font-weight: normal;
+  }
+}
+
+.extended-values {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: baseline;
+  & > div {
+    height: 24px;
+    margin: 0 0px 4px 0;
+    display: flex;
+    align-items: center;
+    & > div {
+      width: 20px;
+      height: 20px;
+      border: 2px solid #dadada;
+      cursor: pointer;
+      margin: 0px 10px 0px 0px;
+      &.current {
+        border: 2px solid #656565;
+        -webkit-box-shadow: 0px 0px 5px 0px rgba(0,0,0,0.75);
+        -moz-box-shadow: 0px 0px 5px 0px rgba(0,0,0,0.75);
+        box-shadow: 0px 0px 5px 0px rgba(0,0,0,0.75);
+      }
+    }
+  }
+}
+
+.form-check-extended {
+  width: 20px;
+  height: 20px;
+  margin: 0px 20px 0px 0px;
+  & > div {
+    width: 18px;
+    height: 18px;
+    border: 1px solid #d8d8d8;
+    cursor: pointer;
+    & > span {
+      text-align: center;
+      width: 100%;
+      display: block;
+      font-size: 10pt;
+      line-height: 18px;
+    }
+    &:hover {
+
+    }
+  }
+}
+

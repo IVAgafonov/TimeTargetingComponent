@@ -1,52 +1,70 @@
-<div class="row time-targeting" ng-init="$ctrl.selectTimeTargeting($ctrl.model.defaultButtonSelected);">
-    <div class="form-group">
-        <div class="form-line">
-            <div class="btn-group">
-                <a href="" class="btn btn-outline" ng-class="{'btn-active': button.selected}" ng-click="$ctrl.selectTimeTargeting($index);" ng-repeat="button in $ctrl.model.buttons track by $index">
-                    {{button.name}}
-                </a>
-                <a ng-show="$ctrl.model.reload == true" ng-click="$ctrl.selectByCoords(-1);" href="" class="undo">
+<div class="time-targeting-wrapper" ng-class="{'extended': $ctrl.options.extended}">
+    <div class="row time-targeting" ng-init="$ctrl.options.buttons.length && $ctrl.selectTimeTargeting($ctrl.options.defaultButtonSelected);">
+        <div class="form-group">
+            <div class="form-line">
+                <div class="btn-group">
+                    <a href="" class="btn btn-outline" ng-class="{'btn-active': button.selected}" ng-click="$ctrl.selectTimeTargeting($index);" ng-repeat="button in $ctrl.options.buttons track by $index">
+                        {{button.name}}
+                    </a>
+                    <a ng-show="$ctrl.options.reload == true" ng-click="$ctrl.selectByCoords(-1);" href="" class="undo">
                     <span class="undo-icon">
                         <i class="f-ico i-refresh"></i>
                     </span>
-                    <span class="undo-text">
+                        <span class="undo-text">
                         Сбросить
                     </span>
-                </a>
+                    </a>
+                </div>
+            </div>
+        </div>
+        <table class="checkbox-zone">
+            <thead>
+            <tr>
+                <th></th>
+                <th class="noselect" ng-click="$ctrl.selectColumn($index);" ng-repeat="hour in $ctrl.options.hours track by $index"><span>{{hour}}</span></th>
+            </tr>
+            </thead>
+            <tbody ng-mouseup="$ctrl.selectEnd();" nng-mo="$ctrl.selectEnd();">
+            <tr ng-repeat-start="day in $ctrl.options.days track by $index">
+                <th ng-click="$ctrl.selectRow($index);" class="noselect"><span>{{day}}</span></th>
+                <td ng-repeat="hour in $ctrl.options.hours track by $index"
+                    ng-mousedown="$ctrl.selectStart($parent.$index, $index);"
+                    ng-mouseup="$ctrl.selectEnd();"
+                    ng-mouseenter="$ctrl.selectEnter($parent.$index, $index);"
+                >
+                    <div class="form-check" ng-show="!$ctrl.options.extended">
+                        <input type="checkbox" class="checkbox" id="wd-{{$parent.$index}}-h-{{$index}}"
+                               ng-model="$ctrl.model[$parent.$index][$index]"
+                               ng-change="$ctrl.options.onChange()"
+                               ng-init="0"
+                               ng-false-value="0"
+                               ng-true-value="1"
+                        >
+                        <label for="wd-{{$parent.$index}}-h-{{$index}}">
+                        <span class="form-check-control"
+                        ></span>
+                        </label>
+                    </div>
+                    <div class="form-check-extended" ng-show="$ctrl.options.extended">
+                        <div class="extended-item ext-val{{$ctrl.model[$parent.$index][$index]}}"
+                             ng-model="$ctrl.model[$parent.$index][$index]"
+                             ng-click="$ctrl.extendedChange($parent.$index, $index)">
+                            <span class="noselect" ng-show="$ctrl.model[$parent.$index][$index] > 0 && $ctrl.model[$parent.$index][$index] < 100">{{$ctrl.model[$parent.$index][$index]}}</span>
+                        </div>
+                    </div>
+                </td>
+            </tr>
+            <tr ng-repeat-end="" ng-if="$ctrl.options.spacing.indexOf($index) != -1" class="time-targeting-spacing"></tr>
+            </tbody>
+        </table>
+    </div>
+    <div class="extended-block" ng-show="$ctrl.options.extended">
+        <h3>{{$ctrl.options.extendedTitle}}</h3>
+        <div class="extended-values">
+            <div ng-repeat="extendedValue in $ctrl.options.extendedValues track by $index">
+                <div ng-click="$ctrl.selectValue = extendedValue" class="ext-val{{extendedValue}}" ng-class="{'current': extendedValue == $ctrl.selectValue}"></div>
+                <span>{{extendedValue}} <span ng-show="extendedValue">%</span></span>
             </div>
         </div>
     </div>
-    <table class="checkbox-zone">
-        <thead>
-        <tr>
-            <th></th>
-            <th class="noselect" ng-click="$ctrl.selectColumn($index);" ng-repeat="hour in $ctrl.model.hours track by $index"><span>{{hour}}</span></th>
-        </tr>
-        </thead>
-        <tbody ng-mouseup="$ctrl.selectEnd();" nng-mo="$ctrl.selectEnd();">
-        <tr ng-repeat-start="day in $ctrl.model.days track by $index">
-            <th ng-click="$ctrl.selectRow($index);" class="noselect"><span>{{day}}</span></th>
-            <td ng-repeat="hour in $ctrl.model.hours track by $index"
-                ng-mousedown="$ctrl.selectStart($parent.$index, $index);"
-                ng-mouseup="$ctrl.selectEnd();"
-                ng-mouseenter="$ctrl.selectEnter($parent.$index, $index);"
-            >
-                <div class="form-check">
-                    <input type="checkbox" class="checkbox" id="wd-{{$parent.$index}}-h-{{$index}}"
-                           ng-model="$ctrl.model.grid[$parent.$index][$index]",
-                           ng-change="$ctrl.model.onChange()"
-                           ng-init="0"
-                           ng-false-value="0"
-                           ng-true-value="1"
-                    >
-                    <label for="wd-{{$parent.$index}}-h-{{$index}}">
-                        <span class="form-check-control"
-                        ></span>
-                    </label>
-                </div>
-            </td>
-        </tr>
-        <tr ng-repeat-end="" ng-if="$ctrl.model.spacing.indexOf($index) != -1" class="time-targeting-spacing"></tr>
-        </tbody>
-    </table>
 </div>

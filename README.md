@@ -32,7 +32,9 @@ angular.module('app', ['timeTargetingModule'])
 ```js
 var vm = this;
 
-vm.model = {
+vm.model = {}
+
+vm.options = {
             days: ['пн', 'вт', 'ср', 'чт', 'пт', 'сб', 'вс', 'пр'],
             hours: ['00', '01', '02', '03', '04', '05', '06', '07', '08', '09', '10', '11', '12', '13', '14', '15', '16', '17', '18', '19', '20', '21', '22', '23'],
             buttons: [
@@ -57,18 +59,34 @@ vm.model = {
             defaultButtonSelected: 1,
             reload: true,
             spacing: [4, 6],
-            grid: {},
+            extended: true,
+            extendedTitle: 'Ставка',
+            extendedValues: [100,90,80,70,60,50,40,30,20,10,0],
+            extendedDefaultValue: 100,
             onChange: function () {
                 console.log('model changed');
-            };
+            },
+            onInit: function () {
+                console.log('component init');
+            }
+};
 ```
 
-Time targeting model:
+Time targeting model
+*[y][x] = value for extended and 1/0 for simple //Will be initialize after init
+
+Time targeting (simple) options:
 * days - y axis;
 * hours - x axis;
 * buttons - array of objects {name: 'button-name', coords: 'coordinates for select', noclear: 'if true - button will not clear time targeting area'}
 * defaultButtonSelected - index of default selected button
 * reload - show clear button
 * spacing - array of indexes of y axis for indent
-* grid: raw time targeting model ([x][y] = true/false)
 * onChange: callback call when model changed
+* onInit: callback call when component init
+
+Time targeting (extended) options:
+* extended - true/false - is component extended
+* extendedTitle - title of extended values
+* extendedValues - options for model
+* extendedDefaultValue - default selected option
