@@ -25,7 +25,7 @@ angular.module('app', ['timeTargetingModule'])
 
 2. Add html component and resolve 'model' dependency
 ```html
-<time-targeting-component model="$ctrl.model"></time-targeting-component>
+<time-targeting-component model="$ctrl.model" options="$ctrl.options"></time-targeting-component>
 ```
 
 3. Create time targeting model in parent controller
