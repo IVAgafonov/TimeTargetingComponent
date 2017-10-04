@@ -59,6 +59,7 @@ function build() {
         .pipe(gulp.dest('./dist'));
 
     gulp.src(paths.styles)
+        .pipe(sass()).on('error', sass.logError)
         .pipe(cleanCss({compatibility: 'ie8'}))
         .pipe(gulp.dest('./dist'));
 
