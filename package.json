@@ -1,6 +1,6 @@
 {
   "name": "time-targeting-component",
-  "version": "0.1.0",
+  "version": "0.1.5",
   "description": "Time targeting component",
   "main": "dist/timeTargetingComponent.js",
   "scripts": {
