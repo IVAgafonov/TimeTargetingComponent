@@ -31,7 +31,8 @@
                     ng-mousedown="$ctrl.selectStart($parent.$index, $index);"
                     ng-mouseup="$ctrl.selectEnd();"
                     ng-mouseenter="$ctrl.selectEnter($parent.$index, $index);"
-                >
+                    draggable="false"
+                class="unsel">
                     <div class="form-check" ng-show="!$ctrl.options.extended">
                         <input type="checkbox" class="checkbox" id="wd-{{$parent.$index}}-h-{{$index}}"
                                ng-model="$ctrl.model[$parent.$index][$index]"
@@ -45,11 +46,11 @@
                         ></span>
                         </label>
                     </div>
-                    <div class="form-check-extended" ng-show="$ctrl.options.extended">
-                        <div class="extended-item ext-val{{$ctrl.model[$parent.$index][$index]}}"
+                    <div class="form-check-extended unsel" ng-show="$ctrl.options.extended" draggable="false">
+                        <div class="extended-item unsel ext-val{{$ctrl.model[$parent.$index][$index]}}"
                              ng-model="$ctrl.model[$parent.$index][$index]"
-                             ng-click="$ctrl.extendedChange($parent.$index, $index)">
-                            <span class="noselect" ng-show="$ctrl.model[$parent.$index][$index] > 0 && $ctrl.model[$parent.$index][$index] < 100">{{$ctrl.model[$parent.$index][$index]}}</span>
+                             ng-click="$ctrl.extendedChange($parent.$index, $index)" draggable="false">
+                            <span class="noselect unsel" ng-show="$ctrl.model[$parent.$index][$index] > 0 && $ctrl.model[$parent.$index][$index] < 100" draggable="false">{{$ctrl.model[$parent.$index][$index]}}</span>
                         </div>
                     </div>
                 </td>
