@@ -6,7 +6,7 @@
                     <a href="" class="btn btn-outline" ng-class="{'btn-active': button.selected}" ng-click="$ctrl.selectTimeTargeting($index);" ng-repeat="button in $ctrl.options.buttons track by $index">
                         {{button.name}}
                     </a>
-                    <a ng-show="$ctrl.options.reload == true" ng-click="$ctrl.selectByCoords(-1);" href="" class="undo">
+                    <a ng-show="$ctrl.options.reload == true" ng-click="$ctrl.selectByButton(-1);" href="" class="undo">
                     <span class="undo-icon">
                         <i class="f-ico i-refresh"></i>
                     </span>
@@ -26,7 +26,7 @@
             </thead>
             <tbody ng-mouseup="$ctrl.selectEnd();" nng-mo="$ctrl.selectEnd();">
             <tr ng-repeat-start="day in $ctrl.options.days track by $index">
-                <th ng-click="$ctrl.selectRow($index);" class="noselect"><span>{{day}}</span></th>
+                <th ng-click="$ctrl.selectRow($index);" class="noselect"><span title="{{$ctrl.options.daysHint[$index]}}">{{day}}</span></th>
                 <td ng-repeat="hour in $ctrl.options.hours track by $index"
                     ng-mousedown="$ctrl.selectStart($parent.$index, $index);"
                     ng-mouseup="$ctrl.selectEnd();"

@@ -246,7 +246,7 @@
                 model: '=',
                 options: '<'
             },
-            template:'<div class="time-targeting-wrapper" ng-class="{\'extended\': $ctrl.options.extended}"><div class="row time-targeting" ng-init="$ctrl.options.buttons.length && $ctrl.selectTimeTargeting($ctrl.options.defaultButtonSelected);"><div class="form-group"><div class="form-line"><div class="btn-group"><a class="btn btn-outline" ng-class="{\'btn-active\': button.selected}" ng-click="$ctrl.selectTimeTargeting($index);" ng-repeat="button in $ctrl.options.buttons track by $index">{{button.name}}</a> <a ng-show="$ctrl.options.reload == true" ng-click="$ctrl.selectByCoords(-1);" class="undo"><span class="undo-icon"><i class="f-ico i-refresh"></i></span> <span class="undo-text">Сбросить</span></a></div></div></div><table class="checkbox-zone"><thead><tr><th></th><th class="noselect" ng-click="$ctrl.selectColumn($index);" ng-repeat="hour in $ctrl.options.hours track by $index"><span>{{hour}}</span></th></tr></thead><tbody ng-mouseup="$ctrl.selectEnd();" nng-mo="$ctrl.selectEnd();"><tr ng-repeat-start="day in $ctrl.options.days track by $index"><th ng-click="$ctrl.selectRow($index);" class="noselect"><span>{{day}}</span></th><td ng-repeat="hour in $ctrl.options.hours track by $index" ng-mousedown="$ctrl.selectStart($parent.$index, $index);" ng-mouseup="$ctrl.selectEnd();" ng-mouseenter="$ctrl.selectEnter($parent.$index, $index);" draggable="false" class="unsel"><div class="form-check" ng-show="!$ctrl.options.extended"><input type="checkbox" class="checkbox" id="wd-{{$parent.$index}}-h-{{$index}}" ng-model="$ctrl.model[$parent.$index][$index]" ng-change="$ctrl.options.onChange()" ng-init="0" ng-false-value="0" ng-true-value="1"> <label for="wd-{{$parent.$index}}-h-{{$index}}"><span class="form-check-control"></span></label></div><div class="form-check-extended unsel" ng-show="$ctrl.options.extended" draggable="false"><div class="extended-item unsel ext-val{{$ctrl.model[$parent.$index][$index]}}" ng-model="$ctrl.model[$parent.$index][$index]" ng-click="$ctrl.extendedChange($parent.$index, $index)" draggable="false"><span class="noselect unsel" ng-show="$ctrl.model[$parent.$index][$index] > 0 && $ctrl.model[$parent.$index][$index] < 100" draggable="false">{{$ctrl.model[$parent.$index][$index]}}</span></div></div></td></tr><tr ng-repeat-end ng-if="$ctrl.options.spacing.indexOf($index) != -1" class="time-targeting-spacing"></tr></tbody></table></div><div class="extended-block" ng-show="$ctrl.options.extended"><h3>{{$ctrl.options.extendedTitle}}</h3><div class="extended-values"><div ng-repeat="extendedValue in $ctrl.options.extendedValues track by $index"><div ng-click="$ctrl.selectValue = extendedValue" class="ext-val{{extendedValue}}" ng-class="{\'current\': extendedValue == $ctrl.selectValue}"></div><span>{{extendedValue}} <span ng-show="extendedValue">%</span></span></div></div></div></div>',
+            template:'<div class="time-targeting-wrapper" ng-class="{\'extended\': $ctrl.options.extended}"><div class="row time-targeting" ng-init="$ctrl.options.buttons.length && $ctrl.selectTimeTargeting($ctrl.options.defaultButtonSelected);"><div class="form-group"><div class="form-line"><div class="btn-group"><a class="btn btn-outline" ng-class="{\'btn-active\': button.selected}" ng-click="$ctrl.selectTimeTargeting($index);" ng-repeat="button in $ctrl.options.buttons track by $index">{{button.name}}</a> <a ng-show="$ctrl.options.reload == true" ng-click="$ctrl.selectByButton(-1);" class="undo"><span class="undo-icon"><i class="f-ico i-refresh"></i></span> <span class="undo-text">Сбросить</span></a></div></div></div><table class="checkbox-zone"><thead><tr><th></th><th class="noselect" ng-click="$ctrl.selectColumn($index);" ng-repeat="hour in $ctrl.options.hours track by $index"><span>{{hour}}</span></th></tr></thead><tbody ng-mouseup="$ctrl.selectEnd();" nng-mo="$ctrl.selectEnd();"><tr ng-repeat-start="day in $ctrl.options.days track by $index"><th ng-click="$ctrl.selectRow($index);" class="noselect"><span title="{{$ctrl.options.daysHint[$index]}}">{{day}}</span></th><td ng-repeat="hour in $ctrl.options.hours track by $index" ng-mousedown="$ctrl.selectStart($parent.$index, $index);" ng-mouseup="$ctrl.selectEnd();" ng-mouseenter="$ctrl.selectEnter($parent.$index, $index);" draggable="false" class="unsel"><div class="form-check" ng-show="!$ctrl.options.extended"><input type="checkbox" class="checkbox" id="wd-{{$parent.$index}}-h-{{$index}}" ng-model="$ctrl.model[$parent.$index][$index]" ng-change="$ctrl.options.onChange()" ng-init="0" ng-false-value="0" ng-true-value="1"> <label for="wd-{{$parent.$index}}-h-{{$index}}"><span class="form-check-control"></span></label></div><div class="form-check-extended unsel" ng-show="$ctrl.options.extended" draggable="false"><div class="extended-item unsel ext-val{{$ctrl.model[$parent.$index][$index]}}" ng-model="$ctrl.model[$parent.$index][$index]" ng-click="$ctrl.extendedChange($parent.$index, $index)" draggable="false"><span class="noselect unsel" ng-show="$ctrl.model[$parent.$index][$index] > 0 && $ctrl.model[$parent.$index][$index] < 100" draggable="false">{{$ctrl.model[$parent.$index][$index]}}</span></div></div></td></tr><tr ng-repeat-end ng-if="$ctrl.options.spacing.indexOf($index) != -1" class="time-targeting-spacing"></tr></tbody></table></div><div class="extended-block" ng-show="$ctrl.options.extended"><h3>{{$ctrl.options.extendedTitle}}</h3><div class="extended-values"><div ng-repeat="extendedValue in $ctrl.options.extendedValues track by $index"><div ng-click="$ctrl.selectValue = extendedValue" class="ext-val{{extendedValue}}" ng-class="{\'current\': extendedValue == $ctrl.selectValue}"></div><span>{{extendedValue}} <span ng-show="extendedValue">%</span></span></div></div></div></div>',
             controller: ['$timeout', timeTargetingController]
         });
 
@@ -264,9 +264,27 @@
 
         vm.defaultSelectValue = 1;
 
+        vm.externalModel = '';
+
+        vm.onInnerChange = function () {
+            vm.externalModel = vm.options.timeAdapter.objToString(vm.model);
+            for (var i = 0; i < vm.options.buttons.length; i++) {
+                if (vm.externalModel == vm.options.buttons[i].model || vm.options.buttons[i].model == '') {
+                    vm.options.buttons[i].selected = true;
+                    for (var l = 0; l < vm.options.buttons.length; l++) {
+                        if (l != i) {
+                            vm.options.buttons[l].selected = false;
+                        }
+                    }
+                    return 0;
+                }
+            }
+        };
+
         vm.$onInit = function() {
             vm.options = vm.options || {};
             vm.options.days = vm.options.days || ['пн', 'вт', 'ср', 'чт', 'пт', 'сб', 'вс', 'пр'];
+            vm.options.daysHint = vm.options.daysHint || ['пн', 'вт', 'ср', 'чт', 'пт', 'сб', 'вс', 'праздничные дни'];
             vm.options.hours = vm.options.hours || ['00', '01', '02', '03', '04', '05', '06', '07', '08', '09', '10', '11', '12', '13', '14', '15', '16', '17', '18', '19', '20', '21', '22', '23'];
             vm.options.buttons = vm.options.buttons || [];
             vm.options.defaultButtonSelected = vm.options.defaultButtonSelected || 1;
@@ -296,6 +314,7 @@
         vm.extendedChange = function (y, x) {
             vm.model[y][x] = vm.model[y][x] ? (vm.model[y][x] != vm.selectValue ? vm.selectValue : 0) : vm.selectValue;
             vm.options.onChange();
+            vm.onInnerChange();
         };
 
         vm.selectStart = function (dayIndex, hourIndex) {
@@ -359,6 +378,7 @@
             if (vm.options.onChange) {
                 vm.options.onChange();
             }
+            vm.onInnerChange();
         };
 
         vm.selectRow = function (index) {
@@ -375,13 +395,15 @@
             if (vm.options.onChange) {
                 vm.options.onChange();
             }
+            vm.onInnerChange();
         };
 
-        vm.selectByCoords = function (index) {
+        vm.selectByButton = function (index) {
             if (index != -1 && vm.options.buttons[index].noclear) {
                 if (vm.options.onChange) {
                     vm.options.onChange();
                 }
+                vm.onInnerChange();
                 return;
             }
 
@@ -395,24 +417,18 @@
                 if (vm.options.onChange) {
                     vm.options.onChange();
                 }
+                vm.onInnerChange();
                 return;
             }
 
-            if (vm.options.buttons[index].coords.length) {
-                vm.selectStartDayFor = vm.options.buttons[index].coords[0];
-                vm.selectEndDayFor = vm.options.buttons[index].coords[2];
-                vm.selectStartHourFor = vm.options.buttons[index].coords[1];
-                vm.selectEndHourFor = vm.options.buttons[index].coords[3];
-
-                for (d = vm.selectStartDayFor; d <= vm.selectEndDayFor; d++) {
-                    for (h = vm.selectStartHourFor; h <= vm.selectEndHourFor; h++) {
-                        vm.model[d][h] = vm.selectValue ? vm.selectValue : (vm.options.extended ? vm.selectValue : 1);
-                    }
-                }
+            if (vm.options.buttons[index].model) {
+                 vm.options.timeAdapter.stringToObj(vm.options.buttons[index].model, vm.model);
             }
+
             if (vm.options.onChange) {
                 vm.options.onChange();
             }
+            vm.onInnerChange();
         };
 
         vm.selectEnd = function () {
@@ -421,6 +437,9 @@
             if (vm.options.onChange) {
                 vm.options.onChange();
             }
+            $timeout(function () {
+                vm.onInnerChange();
+            }, 0);
         };
 
         vm.selectTimeTargeting = function(index) {
@@ -428,7 +447,7 @@
                 vm.options.buttons[i].selected = false;
             }
             vm.options.buttons[index].selected = true;
-            vm.selectByCoords(index);
+            vm.selectByButton(index);
         };
     }
 })();
