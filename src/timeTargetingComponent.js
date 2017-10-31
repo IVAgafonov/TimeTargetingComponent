@@ -264,9 +264,27 @@
 
         vm.defaultSelectValue = 1;
 
+        vm.externalModel = '';
+
+        vm.onInnerChange = function () {
+            vm.externalModel = vm.options.timeAdapter.objToString(vm.model);
+            for (var i = 0; i < vm.options.buttons.length; i++) {
+                if (vm.externalModel == vm.options.buttons[i].model || vm.options.buttons[i].model == '') {
+                    vm.options.buttons[i].selected = true;
+                    for (var l = 0; l < vm.options.buttons.length; l++) {
+                        if (l != i) {
+                            vm.options.buttons[l].selected = false;
+                        }
+                    }
+                    return 0;
+                }
+            }
+        };
+
         vm.$onInit = function() {
             vm.options = vm.options || {};
             vm.options.days = vm.options.days || ['пн', 'вт', 'ср', 'чт', 'пт', 'сб', 'вс', 'пр'];
+            vm.options.daysHint = vm.options.daysHint || ['пн', 'вт', 'ср', 'чт', 'пт', 'сб', 'вс', 'праздничные дни'];
             vm.options.hours = vm.options.hours || ['00', '01', '02', '03', '04', '05', '06', '07', '08', '09', '10', '11', '12', '13', '14', '15', '16', '17', '18', '19', '20', '21', '22', '23'];
             vm.options.buttons = vm.options.buttons || [];
             vm.options.defaultButtonSelected = vm.options.defaultButtonSelected || 1;
@@ -296,6 +314,7 @@
         vm.extendedChange = function (y, x) {
             vm.model[y][x] = vm.model[y][x] ? (vm.model[y][x] != vm.selectValue ? vm.selectValue : 0) : vm.selectValue;
             vm.options.onChange();
+            vm.onInnerChange();
         };
 
         vm.selectStart = function (dayIndex, hourIndex) {
@@ -359,6 +378,7 @@
             if (vm.options.onChange) {
                 vm.options.onChange();
             }
+            vm.onInnerChange();
         };
 
         vm.selectRow = function (index) {
@@ -375,13 +395,15 @@
             if (vm.options.onChange) {
                 vm.options.onChange();
             }
+            vm.onInnerChange();
         };
 
-        vm.selectByCoords = function (index) {
+        vm.selectByButton = function (index) {
             if (index != -1 && vm.options.buttons[index].noclear) {
                 if (vm.options.onChange) {
                     vm.options.onChange();
                 }
+                vm.onInnerChange();
                 return;
             }
 
@@ -395,24 +417,18 @@
                 if (vm.options.onChange) {
                     vm.options.onChange();
                 }
+                vm.onInnerChange();
                 return;
             }
 
-            if (vm.options.buttons[index].coords.length) {
-                vm.selectStartDayFor = vm.options.buttons[index].coords[0];
-                vm.selectEndDayFor = vm.options.buttons[index].coords[2];
-                vm.selectStartHourFor = vm.options.buttons[index].coords[1];
-                vm.selectEndHourFor = vm.options.buttons[index].coords[3];
-
-                for (d = vm.selectStartDayFor; d <= vm.selectEndDayFor; d++) {
-                    for (h = vm.selectStartHourFor; h <= vm.selectEndHourFor; h++) {
-                        vm.model[d][h] = vm.selectValue ? vm.selectValue : (vm.options.extended ? vm.selectValue : 1);
-                    }
-                }
+            if (vm.options.buttons[index].model) {
+                 vm.options.timeAdapter.stringToObj(vm.options.buttons[index].model, vm.model);
             }
+
             if (vm.options.onChange) {
                 vm.options.onChange();
             }
+            vm.onInnerChange();
         };
 
         vm.selectEnd = function () {
@@ -421,6 +437,9 @@
             if (vm.options.onChange) {
                 vm.options.onChange();
             }
+            $timeout(function () {
+                vm.onInnerChange();
+            }, 0);
         };
 
         vm.selectTimeTargeting = function(index) {
@@ -428,7 +447,7 @@
                 vm.options.buttons[i].selected = false;
             }
             vm.options.buttons[index].selected = true;
-            vm.selectByCoords(index);
+            vm.selectByButton(index);
         };
     }
 })();

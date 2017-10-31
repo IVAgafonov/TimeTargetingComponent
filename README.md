@@ -40,22 +40,23 @@ vm.options = {
             buttons: [
                 {
                     name: 'Круглосуточно, вся неделя',
-                    coords: [0,0,6,23]
+                    model: '1ABCDEFGHIJKLMNOPQRSTUVWX2ABCDEFGHIJKLMNOPQRSTUVWX3ABCDEFGHIJKLMNOPQRSTUVWX4ABCDEFGHIJKLMNOPQRSTUVWX5ABCDEFGHIJKLMNOPQRSTUVWX6ABCDEFGHIJKLMNOPQRSTUVWX7ABCDEFGHIJKLMNOPQRSTUVWX'
                 },
                 {
                     name: 'Рабочие часы в будние дни',
-                    coords: [0,9,4,17]
+                    model: '1JKLMNOPQRS2JKLMNOPQRS3JKLMNOPQRS4JKLMNOPQRS5JKLMNOPQRS'
                 },
                 {
                     name: 'Будние дни, круглосуточно',
-                    coords: [0,0,4,23]
+                    model: '1ABCDEFGHIJKLMNOPQRSTUVWX2ABCDEFGHIJKLMNOPQRSTUVWX3ABCDEFGHIJKLMNOPQRSTUVWX4ABCDEFGHIJKLMNOPQRSTUVWX5ABCDEFGHIJKLMNOPQRSTUVWX'
                 },
                 {
                     name: 'Пользовательские настройки',
-                    coords: [],
+                    model: '',
                     noclear: true
                 }
             ],
+            timeAdapter: defaultTimeAdapter,
             defaultButtonSelected: 1,
             reload: true,
             spacing: [4, 6],
@@ -78,7 +79,8 @@ Time targeting model
 Time targeting (simple) options:
 * days - y axis;
 * hours - x axis;
-* buttons - array of objects {name: 'button-name', coords: 'coordinates for select', noclear: 'if true - button will not clear time targeting area'}
+* buttons - array of objects {name: 'button-name', model: 'external model', noclear: 'if true - button will not clear time targeting area'}
+* timeAdapter - time adapter for convert model
 * defaultButtonSelected - index of default selected button
 * reload - show clear button
 * spacing - array of indexes of y axis for indent

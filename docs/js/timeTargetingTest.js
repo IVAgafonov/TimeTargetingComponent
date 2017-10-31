@@ -27,26 +27,28 @@
 
         vm.options = {
             days: ['пн', 'вт', 'ср', 'чт', 'пт', 'сб', 'вс', 'пр'],
+            daysHint: ['Понедельник', 'Вторник', 'Среда', 'Четверг', 'Пятница', 'Суббота', 'Воскресенье', 'Праздничные дни'],
             hours: ['00', '01', '02', '03', '04', '05', '06', '07', '08', '09', '10', '11', '12', '13', '14', '15', '16', '17', '18', '19', '20', '21', '22', '23'],
             buttons: [
                 {
                     name: 'Круглосуточно, вся неделя',
-                    coords: [0,0,6,23]
+                    model: '1ABCDEFGHIJKLMNOPQRSTUVWX2ABCDEFGHIJKLMNOPQRSTUVWX3ABCDEFGHIJKLMNOPQRSTUVWX4ABCDEFGHIJKLMNOPQRSTUVWX5ABCDEFGHIJKLMNOPQRSTUVWX6ABCDEFGHIJKLMNOPQRSTUVWX7ABCDEFGHIJKLMNOPQRSTUVWX'
                 },
                 {
                     name: 'Рабочие часы в будние дни',
-                    coords: [0,9,4,18]
+                    model: '1JKLMNOPQRS2JKLMNOPQRS3JKLMNOPQRS4JKLMNOPQRS5JKLMNOPQRS'
                 },
                 {
                     name: 'Будние дни, круглосуточно',
-                    coords: [0,0,4,23]
+                    model: '1ABCDEFGHIJKLMNOPQRSTUVWX2ABCDEFGHIJKLMNOPQRSTUVWX3ABCDEFGHIJKLMNOPQRSTUVWX4ABCDEFGHIJKLMNOPQRSTUVWX5ABCDEFGHIJKLMNOPQRSTUVWX'
                 },
                 {
                     name: 'Пользовательские настройки',
-                    coords: [],
+                    model: '',
                     noclear: true
                 }
             ],
+            timeAdapter: defaultTimeAdapter,
             defaultButtonSelected: 1,
             reload: true,
             spacing: [4, 6],
@@ -61,26 +63,28 @@
 
         vm.optionsTwo = {
             days: ['пн', 'вт', 'ср', 'чт', 'пт', 'сб', 'вс', 'пр'],
+            daysHint: ['Понедельник', 'Вторник', 'Среда', 'Четверг', 'Пятница', 'Суббота', 'Воскресенье', 'Праздничные дни'],
             hours: ['00', '01', '02', '03', '04', '05', '06', '07', '08', '09', '10', '11', '12', '13', '14', '15', '16', '17', '18', '19', '20', '21', '22', '23'],
             buttons: [
                 {
                     name: 'Круглосуточно, вся неделя',
-                    coords: [0,0,6,23]
+                    model: '1ABCDEFGHIJKLMNOPQRSTUVWX2ABCDEFGHIJKLMNOPQRSTUVWX3ABCDEFGHIJKLMNOPQRSTUVWX4ABCDEFGHIJKLMNOPQRSTUVWX5ABCDEFGHIJKLMNOPQRSTUVWX6ABCDEFGHIJKLMNOPQRSTUVWX7ABCDEFGHIJKLMNOPQRSTUVWX'
                 },
                 {
                     name: 'Рабочие часы в будние дни',
-                    coords: [0,9,4,18]
+                    model: '1JKLMNOPQRS2JKLMNOPQRS3JKLMNOPQRS4JKLMNOPQRS5JKLMNOPQRS'
                 },
                 {
                     name: 'Будние дни, круглосуточно',
-                    coords: [0,0,4,23]
+                    model: '1ABCDEFGHIJKLMNOPQRSTUVWX2ABCDEFGHIJKLMNOPQRSTUVWX3ABCDEFGHIJKLMNOPQRSTUVWX4ABCDEFGHIJKLMNOPQRSTUVWX5ABCDEFGHIJKLMNOPQRSTUVWX'
                 },
                 {
                     name: 'Пользовательские настройки',
-                    coords: [],
+                    model: '',
                     noclear: true
                 }
             ],
+            timeAdapter: extendedTimeAdapter,
             defaultButtonSelected: 1,
             reload: true,
             spacing: [4, 6],
